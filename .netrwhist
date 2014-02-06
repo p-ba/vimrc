@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/pavel/vm/vbox/site/com/sugarcrm'
+let g:netrw_dirhist_2='/home/pavel/vm/vbox/site/com/sugarcrm/log4php'
+let g:netrw_dirhist_3='/home/pavel/vm/vbox/site/com/sugarcrm'
+let g:netrw_dirhist_4='/home/pavel/vm/vbox/site/com/sugarcrm/data'
+let g:netrw_dirhist_5='/home/pavel/vm/vbox/site/com/sugarcrm'
+let g:netrw_dirhist_6='/home/pavel/vm/vbox/site/com/sugarcrm/cache'
+let g:netrw_dirhist_7='/home/pavel/vm/vbox/site/com/sugarcrm'
