@@ -58,6 +58,7 @@ set hlsearch "Highlight all search results
 nnoremap <leader>b :nohlsearch<CR>
 nmap ,f :FufBufferTag<CR>
 nmap ,p :FufCoverageFile<CR>
+nmap ,t :FufTag<CR>
 
 " Buffers
 " Ctrl Left & Right move between buffers
