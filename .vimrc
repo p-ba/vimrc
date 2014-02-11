@@ -22,6 +22,7 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
 
 :set tags=./tags;
 
