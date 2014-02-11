@@ -22,6 +22,8 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'mileszs/ack.vim'
 
 :set tags=./tags;
 
@@ -47,6 +49,14 @@ colorscheme railscasts
 set number
 set rnu
 set guioptions=egmt "remove toolbar, scrollbars
+" Ignore following files when completing file/directory names
+" Version control
+set wildignore+=.hg,.git,.svn
+" Python byte code
+set wildignore+=*.pyc
+" Binary images
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+
 
 " Searching
 set incsearch "Search while typing
@@ -57,6 +67,7 @@ set hlsearch "Highlight all search results
 nnoremap <leader>b :nohlsearch<CR>
 nmap ,f :FufBufferTag<CR>
 nmap ,p :FufCoverageFile<CR>
+nmap ,t :FufTag<CR>
 
 " Buffers
 " Ctrl Left & Right move between buffers
@@ -79,3 +90,28 @@ nnoremap <Leader>h <C-w>h
 nnoremap <Leader>l <C-w>l
 nnoremap <Leader>j <C-w>j
 nnoremap <Leader>k <C-w>k
+
+" Ctrl+s
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
+
+" {<CR>
+" auto complete {} indent and position the cursor in the middle line
+inoremap {<CR> {<CR>}<Esc>O
+inoremap (<CR> (<CR>)<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+
+" Move lines
+" Move one line
+nmap <C-S-k> ddkP
+nmap <C-S-j> ddp
+" Move selected lines
+" See http://www.vim.org/scripts/script.php?script_id=1590
+vmap <C-S-k> xkP'[V']
+vmap <C-S-j> xp'[V']
+
+" Backup и swp file
+" Don't create backups
+set nobackup
+" Don't create swap files
+set noswapfile
