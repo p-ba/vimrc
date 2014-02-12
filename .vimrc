@@ -12,7 +12,6 @@ Bundle 'L9'
 Bundle 'twilight'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdtree'
-Bundle 'taglist.vim'
 Bundle 'joonty/vdebug'
 Bundle 'FuzzyFinder'
 Bundle 'mattn/emmet-vim'
@@ -28,7 +27,6 @@ Bundle 'mileszs/ack.vim'
 :set tags=./tags;
 
 map <C-n> :NERDTreeToggle<CR>
-nnoremap <silent> <F8> :TlistToggle<CR>
 
 " Indentaion
 set tabstop=4
