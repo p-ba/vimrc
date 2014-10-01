@@ -12,7 +12,6 @@ Bundle 'L9'
 Bundle 'twilight'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdtree'
-Bundle 'joonty/vdebug'
 Bundle 'FuzzyFinder'
 Bundle 'mattn/emmet-vim'
 Bundle 'jpo/vim-railscasts-theme'
@@ -23,8 +22,13 @@ Bundle 'honza/vim-snippets'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'honza/vim-snippets'
 
 :set tags=./tags;
+
+set rtp+=~/.fzf
 
 map <C-n> :NERDTreeToggle<CR>
 
@@ -33,19 +37,18 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 filetype plugin indent on
+syntax on
 
-let g:vdebug_options = {
-\ "path_maps" : {"/var/www/site/": "/home/pavel/vm/vbox/site/"},
-\ "server"    : "0.0.0.0"
-\}
+autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
 set wildchar=<Tab> wildmenu wildmode=full
+
+set t_Co=256
 
 " Visual options
 colorscheme railscasts
 " set background=dark
 set number
-set rnu
 set guioptions=egmt "remove toolbar, scrollbars
 " Ignore following files when completing file/directory names
 " Version control
