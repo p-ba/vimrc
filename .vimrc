@@ -4,27 +4,31 @@ filetype off "required!
 
 " Vundle
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
-Bundle 'php.vim'
-Bundle 'L9'
-Bundle 'twilight'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'scrooloose/nerdtree'
-Bundle 'FuzzyFinder'
-Bundle 'mattn/emmet-vim'
-Bundle 'jpo/vim-railscasts-theme'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'mileszs/ack.vim'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'honza/vim-snippets'
+Plugin 'gmarik/vundle'
+Plugin 'php.vim'
+Plugin 'L9'
+Plugin 'twilight'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'FuzzyFinder'
+Plugin 'mattn/emmet-vim'
+Plugin 'jpo/vim-railscasts-theme'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'mileszs/ack.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'honza/vim-snippets'
+Plugin 'walm/jshint.vim'
+Plugin 'jelera/vim-javascript-syntax'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 :set tags=./tags;
 
@@ -40,6 +44,7 @@ filetype plugin indent on
 syntax on
 
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
 
 set wildchar=<Tab> wildmenu wildmode=full
 
@@ -116,3 +121,5 @@ vmap <C-S-j> xp'[V']
 set nobackup
 " Don't create swap files
 set noswapfile
+
+set guifont=Ubuntu\ Mono\ 12
