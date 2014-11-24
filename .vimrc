@@ -3,10 +3,10 @@ set nocompatible "be iMproved
 filetype off "required!
 
 " Vundle
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'php.vim'
 Plugin 'L9'
 Plugin 'twilight'
@@ -26,15 +26,28 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'honza/vim-snippets'
 Plugin 'walm/jshint.vim'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'tobyS/pdv'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 :set tags=./tags;
+:set mouse=a
 
 set rtp+=~/.fzf
 
 map <C-n> :NERDTreeToggle<CR>
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-w>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " Indentaion
 set tabstop=4
@@ -44,7 +57,6 @@ filetype plugin indent on
 syntax on
 
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
-autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
 
 set wildchar=<Tab> wildmenu wildmode=full
 
@@ -63,6 +75,9 @@ set wildignore+=*.pyc
 " Binary images
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 
+" PhpDocumentator
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <C-d> :call pdv#DocumentWithSnip()<CR>
 
 " Searching
 set incsearch "Search while typing
@@ -98,8 +113,8 @@ nnoremap <Leader>j <C-w>j
 nnoremap <Leader>k <C-w>k
 
 " Ctrl+s
-map <C-s> <esc>:w<CR>
-imap <C-s> <esc>:w<CR>
+nnoremap <C-s> <esc>:w<CR>
+inoremap <C-s> <esc>:w<CR>
 
 " {<CR>
 " auto complete {} indent and position the cursor in the middle line
@@ -122,4 +137,4 @@ set nobackup
 " Don't create swap files
 set noswapfile
 
-set guifont=Ubuntu\ Mono\ 12
+set guifont=Source\ Code\ Pro\ Medium\ 12
