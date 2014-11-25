@@ -1,5 +1,7 @@
 let mapleader="," "Changes Leader key into a comma instead of a backslash
 set nocompatible "be iMproved
+set laststatus=2
+set encoding=utf-8
 filetype off "required!
 
 " Vundle
@@ -32,6 +34,7 @@ Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'Lokaltog/vim-powerline'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
