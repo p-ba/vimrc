@@ -49,6 +49,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" Php namespace autoimport
+Plugin 'arnaud-lb/vim-php-namespace'
+inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
+noremap <Leader>u :call PhpInsertUse()<CR>
+
 " Indentaion
 set tabstop=4
 set shiftwidth=4
@@ -61,6 +66,9 @@ autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 set wildchar=<Tab> wildmenu wildmode=full
 
 set t_Co=256
+
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " Visual options
 colorscheme railscasts
