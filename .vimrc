@@ -12,7 +12,7 @@ Plugin 'L9'
 Plugin 'twilight'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
-Plugin 'FuzzyFinder'
+"Plugin 'FuzzyFinder'
 Plugin 'mattn/emmet-vim'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -27,6 +27,11 @@ Plugin 'honza/vim-snippets'
 Plugin 'walm/jshint.vim'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'tobyS/pdv'
+Plugin 'SirVer/ultisnips'
+Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -39,7 +44,6 @@ set rtp+=~/.fzf
 map <C-n> :NERDTreeToggle<CR>
 
 " Track the engine.
-Plugin 'SirVer/ultisnips'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-w>"
@@ -50,9 +54,21 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 " Php namespace autoimport
-Plugin 'arnaud-lb/vim-php-namespace'
 inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
 noremap <Leader>u :call PhpInsertUse()<CR>
+
+" Syntastic
+let g:syntastic_js_checkers = ['jshint']
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+
+" CtrlP
+let g:ctrlp_cmd = 'CtrlP'
+nnoremap <Leader>p :CtrlP<Cr>
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_extensions = ['funky']
+nnoremap <Leader>f :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " Indentaion
 set tabstop=4
@@ -94,9 +110,9 @@ set smartcase "Lowercase = case insensitive, any uppercase = case sensitive
 set hlsearch "Highlight all search results
 " clear text hightlighted by seach
 nnoremap <leader>b :nohlsearch<CR>
-nmap ,f :FufBufferTag<CR>
-nmap ,p :FufCoverageFile<CR>
-nmap ,t :FufTag<CR>
+"nmap ,f :FufBufferTag<CR>
+"nmap ,p :FufCoverageFile<CR>
+"nmap ,t :FufTag<CR>
 
 " Buffers
 " Ctrl Left & Right move between buffers
