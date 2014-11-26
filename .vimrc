@@ -28,8 +28,6 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'honza/vim-snippets'
 Plugin 'walm/jshint.vim'
 Plugin 'jelera/vim-javascript-syntax'
-Plugin 'tobyS/pdv'
-Plugin 'SirVer/ultisnips'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
@@ -46,23 +44,17 @@ set rtp+=~/.fzf
 
 map <C-n> :NERDTreeToggle<CR>
 
-" Track the engine.
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<C-w>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 " Php namespace autoimport
 inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
 noremap <Leader>u :call PhpInsertUse()<CR>
+inoremap <Leader>e <C-O>:call PhpExpandClass()<CR>
+noremap <Leader>e :call PhpExpandClass()<CR>
 
 " Syntastic
 let g:syntastic_js_checkers = ['jshint']
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_phpmd_args='codesize, controversial, design, naming, unusedcode'
+let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlP'
