@@ -95,7 +95,12 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " Visual options
-colorscheme railscasts
+try
+    colorscheme railscasts
+catch /^Vim\%((\a\+)\)\=:E185/
+    " deal with it
+endtry
+
 " set background=dark
 set number
 set guioptions=egmt "remove toolbar, scrollbars
