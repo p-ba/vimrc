@@ -35,6 +35,7 @@ Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'sumpygump/php-documentor-vim'
 Plugin 'SirVer/ultisnips'
+Plugin 'jsx/jsx.vim.git'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
