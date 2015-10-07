@@ -36,6 +36,8 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'sumpygump/php-documentor-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'jsx/jsx.vim.git'
+Plugin 'evidens/vim-twig'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -46,6 +48,9 @@ filetype plugin indent on    " required
 set rtp+=~/.fzf
 
 map <C-n> :NERDTreeToggle<CR>
+
+" .editorconfig Fugitive compability
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
