@@ -38,6 +38,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'jsx/jsx.vim.git'
 Plugin 'evidens/vim-twig'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'jonathanfilip/vim-lucius'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -102,7 +103,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " Visual options
 try
-    colorscheme railscasts
+    colorscheme lucius
 catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
