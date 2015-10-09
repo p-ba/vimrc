@@ -39,6 +39,7 @@ Plugin 'jsx/jsx.vim.git'
 Plugin 'evidens/vim-twig'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jonathanfilip/vim-lucius'
+Plugin 'fatih/vim-go'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
