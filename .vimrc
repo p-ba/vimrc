@@ -109,7 +109,7 @@ catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
 
-" set background=dark
+set background=dark
 set number
 set guioptions=egmt "remove toolbar, scrollbars
 " Ignore following files when completing file/directory names
