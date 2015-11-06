@@ -51,7 +51,7 @@ filetype plugin indent on    " required
 set rtp+=~/.fzf
 
 map <C-n> :NERDTreeToggle<CR>
-map <C-t> :TlistToggle<CR>
+map <C-r> :TlistToggle<CR>
 
 " .editorconfig Fugitive compability
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
