@@ -40,6 +40,10 @@ Plugin 'evidens/vim-twig'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'fatih/vim-go'
+Plugin 'moll/vim-node'
+Plugin 'rking/ag.vim'
+Plugin 'joonty/vdebug.git'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -72,7 +76,9 @@ inoremap <Leader>e <C-O>:call PhpExpandClass()<CR>
 noremap <Leader>e :call PhpExpandClass()<CR>
 
 " Syntastic
-let g:syntastic_js_checkers = ['jshint']
+let g:syntastic_js_checkers = ['jshint', 'eslint']
+let g:syntastic_jsx_checkers = ['jshint', 'eslint']
+let g:syntastic_es6_checkers = ['jshint', 'eslint']
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_phpmd_args='codesize, controversial, design, naming, unusedcode'
 let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
@@ -158,8 +164,7 @@ nnoremap <Leader>j <C-w>j
 nnoremap <Leader>k <C-w>k
 
 " Ctrl+s
-nnoremap <C-s> <esc>:w<CR>
-inoremap <C-s> <esc>:w<CR>
+map <Leader>s :w<CR>
 
 " {<CR>
 " auto complete {} indent and position the cursor in the middle line
@@ -183,3 +188,4 @@ set nobackup
 set noswapfile
 
 set guifont=Source\ Code\ Pro\ Medium\ 12
+
