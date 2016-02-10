@@ -43,7 +43,7 @@ Plugin 'fatih/vim-go'
 Plugin 'moll/vim-node'
 Plugin 'rking/ag.vim'
 Plugin 'joonty/vdebug.git'
-
+Plugin 'vim-scripts/taglist.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -54,6 +54,7 @@ filetype plugin indent on    " required
 set rtp+=~/.fzf
 
 map <C-n> :NERDTreeToggle<CR>
+map <C-r> :TlistToggle<CR>
 
 " .editorconfig Fugitive compability
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
