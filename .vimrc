@@ -1,4 +1,4 @@
-let mapleader="," "Changes Leader key into a comma instead of a backslash
+let mapleader=" " "Changes Leader key into a space instead of a backslash
 set nocompatible "be iMproved
 set laststatus=2
 set encoding=utf-8
@@ -53,8 +53,10 @@ filetype plugin indent on    " required
 
 set rtp+=~/.fzf
 
+" reload vimrc
+map <leader>s :source ~/.vimrc<CR>
+
 map <C-n> :NERDTreeToggle<CR>
-map <C-r> :TlistToggle<CR>
 
 " .editorconfig Fugitive compability
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
