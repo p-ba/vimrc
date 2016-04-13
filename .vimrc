@@ -44,6 +44,8 @@ Plugin 'moll/vim-node'
 Plugin 'rking/ag.vim'
 Plugin 'joonty/vdebug.git'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'mhinz/vim-startify'
+Plugin 'terryma/vim-expand-region'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -52,9 +54,6 @@ filetype plugin indent on    " required
 :set mouse=a
 
 set rtp+=~/.fzf
-
-" reload vimrc
-map <leader>s :source ~/.vimrc<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 
@@ -155,10 +154,12 @@ nnoremap <silent> <Leader>q :bd<CR>
 
 " Copy/paste options
 set pastetoggle=<F2>
-" ,v = Paste from OS buffer
-map <Leader>v "+gP
-" ,c = Copy to OS buffer
-map <Leader>c "+y
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 
 "------ Moving Between Windows ------
 nnoremap <Leader>h <C-w>h
