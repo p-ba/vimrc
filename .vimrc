@@ -43,7 +43,7 @@ Plugin 'fatih/vim-go'
 Plugin 'moll/vim-node'
 Plugin 'rking/ag.vim'
 Plugin 'joonty/vdebug.git'
-Plugin 'vim-scripts/taglist.vim'
+Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-startify'
 Plugin 'terryma/vim-expand-region'
 
