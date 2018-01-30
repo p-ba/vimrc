@@ -9,43 +9,27 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'php.vim'
-Plugin 'L9'
-Plugin 'twilight'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'FuzzyFinder'
 Plugin 'mattn/emmet-vim'
-Plugin 'jpo/vim-railscasts-theme'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'mileszs/ack.vim'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'honza/vim-snippets'
-Plugin 'walm/jshint.vim'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'dbeecham/ctrlp-commandpalette.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'sumpygump/php-documentor-vim'
+" Snippets
 Plugin 'SirVer/ultisnips'
-Plugin 'jsx/jsx.vim.git'
-Plugin 'evidens/vim-twig'
+Plugin 'honza/vim-snippets'
+
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jonathanfilip/vim-lucius'
-Plugin 'fatih/vim-go'
-Plugin 'moll/vim-node'
 Plugin 'rking/ag.vim'
 Plugin 'joonty/vdebug.git'
-Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-startify'
 Plugin 'terryma/vim-expand-region'
+Plugin 'sheerun/vim-polyglot' " Language syntax support
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -93,6 +77,7 @@ let g:ctrlp_extensions = ['funky']
 nnoremap <Leader>f :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <leader>t :CtrlPCommandPalette<cr>
 
 " Indentaion
 set tabstop=4
@@ -139,9 +124,6 @@ set smartcase "Lowercase = case insensitive, any uppercase = case sensitive
 set hlsearch "Highlight all search results
 " clear text hightlighted by seach
 nnoremap <leader>b :nohlsearch<CR>
-"nmap ,f :FufBufferTag<CR>
-"nmap ,p :FufCoverageFile<CR>
-"nmap ,t :FufTag<CR>
 
 " Buffers
 " Ctrl Left & Right move between buffers
