@@ -1,38 +1,40 @@
-let mapleader=" " "Changes Leader key into a space instead of a backslash
+let mapleader="," "Changes Leader key into a comma instead of a backslash
 set nocompatible "be iMproved
 set laststatus=2
 set encoding=utf-8
-filetype off "required!
 
-" Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'mattn/emmet-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'arnaud-lb/vim-php-namespace'
-Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'dbeecham/ctrlp-commandpalette.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'sumpygump/php-documentor-vim'
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'arnaud-lb/vim-php-namespace'
+Plug 'scrooloose/syntastic'
+Plug 'kien/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'dbeecham/ctrlp-commandpalette.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'sumpygump/php-documentor-vim'
 " Snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'rking/ag.vim'
-Plugin 'joonty/vdebug.git'
-Plugin 'mhinz/vim-startify'
-Plugin 'terryma/vim-expand-region'
-Plugin 'sheerun/vim-polyglot' " Language syntax support
+Plug 'editorconfig/editorconfig-vim'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'rking/ag.vim'
+Plug 'joonty/vdebug'
+Plug 'mhinz/vim-startify'
+Plug 'terryma/vim-expand-region'
+Plug 'sheerun/vim-polyglot' " Language syntax support
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 :set tags=./tags;
 :set mouse=a
