@@ -17,7 +17,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'dbeecham/ctrlp-commandpalette.vim'
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'sumpygump/php-documentor-vim'
 " Snippets
 Plugin 'SirVer/ultisnips'
@@ -68,6 +68,9 @@ let g:syntastic_es6_checkers = ['jshint', 'eslint']
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_phpmd_args='codesize, controversial, design, naming, unusedcode'
 let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlP'
