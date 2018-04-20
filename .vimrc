@@ -33,6 +33,11 @@ Plug 'joonty/vdebug'
 Plug 'mhinz/vim-startify'
 Plug 'terryma/vim-expand-region'
 Plug 'sheerun/vim-polyglot' " Language syntax support
+if has('nvim')
+    Plug 'roxma/nvim-completion-manager'
+    Plug 'phpactor/phpactor'
+    Plug 'roxma/ncm-phpactor'
+endif
 
 call plug#end()
 
@@ -58,18 +63,42 @@ au BufRead,BufNewFile *.php nnoremap <buffer> <C-P> :call PhpDoc()<CR>
 au BufRead,BufNewFile *.php vnoremap <buffer> <C-P> :call PhpDocRange()<CR>
 
 " Php namespace autoimport
-inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
-noremap <Leader>u :call PhpInsertUse()<CR>
-inoremap <Leader>e <C-O>:call PhpExpandClass()<CR>
-noremap <Leader>e :call PhpExpandClass()<CR>
+" inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
+" noremap <Leader>u :call PhpInsertUse()<CR>
+" inoremap <Leader>e <C-O>:call PhpExpandClass()<CR>
+" noremap <Leader>e :call PhpExpandClass()<CR>
+" Include use statement
+nmap <Leader>u :call phpactor#UseAdd()<CR>
+
+" Invoke the context menu
+nmap <Leader>mm :call phpactor#ContextMenu()<CR>
+
+" Goto definition of class or class member under the cursor
+nmap <Leader>o :call phpactor#GotoDefinition()<CR>
+
+" Transform the classes in the current file
+nmap <Leader>tt :call phpactor#Transform()<CR>
+
+" Generate a new class (replacing the current file)
+nmap <Leader>cc :call phpactor#ClassNew()<CR>
+
+" Extract method from selection
+vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
+autocmd FileType php setlocal omnifunc=phpactor#Complete
+
 
 " Syntastic
 let g:syntastic_js_checkers = ['jshint', 'eslint']
 let g:syntastic_jsx_checkers = ['jshint', 'eslint']
 let g:syntastic_es6_checkers = ['jshint', 'eslint']
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['php']
 let g:syntastic_php_phpmd_args='codesize, controversial, design, naming, unusedcode'
 let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
+
+
+let g:ale_linters = {
+\   'php': ['php', 'phpstan']
+\}
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
