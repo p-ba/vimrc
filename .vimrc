@@ -33,11 +33,14 @@ Plug 'joonty/vdebug'
 Plug 'mhinz/vim-startify'
 Plug 'terryma/vim-expand-region'
 Plug 'sheerun/vim-polyglot' " Language syntax support
+Plug 'majutsushi/tagbar'
 if has('nvim')
     Plug 'roxma/nvim-completion-manager'
     Plug 'phpactor/phpactor'
     Plug 'roxma/ncm-phpactor'
 endif
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'adoy/vim-php-refactoring-toolbox'
 
 call plug#end()
 
@@ -82,8 +85,6 @@ nmap <Leader>tt :call phpactor#Transform()<CR>
 " Generate a new class (replacing the current file)
 nmap <Leader>cc :call phpactor#ClassNew()<CR>
 
-" Extract method from selection
-vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
 autocmd FileType php setlocal omnifunc=phpactor#Complete
 
 
@@ -97,7 +98,7 @@ let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
 
 
 let g:ale_linters = {
-\   'php': ['php', 'phpstan']
+\   'php': ['php', 'phpstan', 'phpcs']
 \}
 
 " Airline
@@ -131,7 +132,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " Visual options
 try
-    colorscheme lucius
+    colorscheme dracula
 catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
@@ -182,9 +183,6 @@ nnoremap <Leader>h <C-w>h
 nnoremap <Leader>l <C-w>l
 nnoremap <Leader>j <C-w>j
 nnoremap <Leader>k <C-w>k
-
-" Ctrl+s
-map <Leader>s :w<CR>
 
 " {<CR>
 " auto complete {} indent and position the cursor in the middle line
