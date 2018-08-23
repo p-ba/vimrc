@@ -132,7 +132,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " Visual options
 try
-    colorscheme dracula
+    colorscheme lucius
 catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
