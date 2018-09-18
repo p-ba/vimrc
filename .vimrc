@@ -36,7 +36,7 @@ Plug 'sheerun/vim-polyglot' " Language syntax support
 Plug 'majutsushi/tagbar'
 if has('nvim')
     Plug 'roxma/nvim-completion-manager'
-    Plug 'phpactor/phpactor'
+    Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
     Plug 'roxma/ncm-phpactor'
 endif
 Plug 'dracula/vim', { 'as': 'dracula' }
