@@ -19,7 +19,6 @@ Plug 'arnaud-lb/vim-php-namespace'
 Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
-Plug 'dbeecham/ctrlp-commandpalette.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'sumpygump/php-documentor-vim'
 " Snippets
@@ -41,6 +40,8 @@ if has('nvim')
 endif
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'osyo-manga/vim-over'
+Plug 'fisadev/vim-ctrlp-cmdpalette'
 
 call plug#end()
 
@@ -98,21 +99,14 @@ let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
 
 
 let g:ale_linters = {
-\   'php': ['php', 'phpstan', 'phpcs']
+\   'php': ['php', 'phan', 'phpcs']
 \}
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 
 " CtrlP
-let g:ctrlp_cmd = 'CtrlP'
-nnoremap <Leader>p :CtrlP<Cr>
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_extensions = ['funky']
-nnoremap <Leader>f :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-nnoremap <leader>t :CtrlPCommandPalette<cr>
+nnoremap <C-e> :CtrlPCmdPalette<Cr>
 
 " Indentaion
 set tabstop=4
