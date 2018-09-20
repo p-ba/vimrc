@@ -122,7 +122,6 @@ set wildchar=<Tab> wildmenu wildmode=full
 set t_Co=256
 
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " Visual options
 try
