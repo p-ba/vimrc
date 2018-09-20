@@ -110,6 +110,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " CtrlP
 nnoremap <C-e> :CtrlPCmdPalette<Cr>
+nnoremap <C-t> :CtrlPBufTag<Cr>
 
 " Indentaion
 set tabstop=4
