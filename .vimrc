@@ -34,9 +34,12 @@ Plug 'terryma/vim-expand-region'
 Plug 'sheerun/vim-polyglot' " Language syntax support
 Plug 'majutsushi/tagbar'
 if has('nvim')
-    Plug 'roxma/nvim-completion-manager'
+    Plug 'ncm2/ncm2'
+    Plug 'roxma/nvim-yarp'
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    set completeopt=noinsert,menuone,noselect
+    Plug 'phpactor/ncm2-phpactor'
     Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
-    Plug 'roxma/ncm-phpactor'
 endif
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'adoy/vim-php-refactoring-toolbox'
