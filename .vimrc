@@ -99,7 +99,7 @@ let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
 
 
 let g:ale_linters = {
-\   'php': ['php', 'phan', 'phpcs']
+\   'php': ['php', 'phpstan', 'phpcs']
 \}
 
 " Airline
