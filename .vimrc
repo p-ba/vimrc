@@ -45,6 +45,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'osyo-manga/vim-over'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
+Plug 'vim-scripts/vim-auto-save'
 
 call plug#end()
 
@@ -165,6 +166,10 @@ noremap <silent> <C-right> :bnext<CR>
 noremap <silent> <C-l> :bnext<CR>
 " Closes the current buffer
 nnoremap <silent> <Leader>q :bd<CR>
+
+" Autosave
+let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0
 
 " Copy/paste options
 if has("virtualedit")
