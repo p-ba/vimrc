@@ -46,6 +46,7 @@ Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'osyo-manga/vim-over'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'vim-scripts/vim-auto-save'
+Plug 'shougo/denite.nvim'
 
 call plug#end()
 
@@ -69,6 +70,32 @@ let g:UltiSnipsEditSplit="vertical"
 au BufRead,BufNewFile *.php inoremap <buffer> <C-P> :call PhpDoc()<CR>
 au BufRead,BufNewFile *.php nnoremap <buffer> <C-P> :call PhpDoc()<CR>
 au BufRead,BufNewFile *.php vnoremap <buffer> <C-P> :call PhpDocRange()<CR>
+
+"Denite
+map <C-F> :DeniteProjectDir -buffer-name=grep grep:::!<CR>
+
+call denite#custom#source(
+\ 'grep', 'matchers', ['matcher_regexp'])
+
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts',['-i', '-U', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+call denite#custom#map(
+	      \ 'insert',
+	      \ '<Down>',
+	      \ '<denite:move_to_next_line>',
+	      \ 'noremap'
+	      \)
+call denite#custom#map(
+	      \ 'insert',
+	      \ '<Up>',
+	      \ '<denite:move_to_previous_line>',
+	      \ 'noremap'
+	      \)
 
 " Php namespace autoimport
 " inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
@@ -110,8 +137,7 @@ let g:ale_linters = {
 let g:airline#extensions#tabline#enabled = 1
 
 " CtrlP
-nnoremap <C-e> :CtrlPCmdPalette<Cr>
-nnoremap <C-t> :CtrlPBufTag<Cr>
+nnoremap <C-R> :CtrlPBufTag<Cr>
 
 " Indentaion
 set tabstop=4
