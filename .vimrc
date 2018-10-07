@@ -26,7 +26,6 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 Plug 'editorconfig/editorconfig-vim'
-Plug 'jonathanfilip/vim-lucius'
 Plug 'rking/ag.vim'
 Plug 'joonty/vdebug'
 Plug 'mhinz/vim-startify'
@@ -47,6 +46,8 @@ Plug 'osyo-manga/vim-over'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'shougo/denite.nvim'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -156,7 +157,7 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
 " Visual options
 try
-    colorscheme lucius
+    colorscheme 256_noir
 catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
