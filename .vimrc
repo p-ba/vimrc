@@ -45,7 +45,6 @@ Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'osyo-manga/vim-over'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'vim-scripts/vim-auto-save'
-Plug 'shougo/denite.nvim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'junegunn/fzf.vim'
 
@@ -72,32 +71,6 @@ au BufRead,BufNewFile *.php inoremap <buffer> <C-P> :call PhpDoc()<CR>
 au BufRead,BufNewFile *.php nnoremap <buffer> <C-P> :call PhpDoc()<CR>
 au BufRead,BufNewFile *.php vnoremap <buffer> <C-P> :call PhpDocRange()<CR>
 
-"Denite
-map <C-F> :DeniteProjectDir -buffer-name=grep grep:::!<CR>
-
-call denite#custom#source(
-\ 'grep', 'matchers', ['matcher_regexp'])
-
-call denite#custom#var('grep', 'command', ['ag'])
-call denite#custom#var('grep', 'default_opts',['-i', '-U', '--vimgrep'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-
-call denite#custom#map(
-	      \ 'insert',
-	      \ '<Down>',
-	      \ '<denite:move_to_next_line>',
-	      \ 'noremap'
-	      \)
-call denite#custom#map(
-	      \ 'insert',
-	      \ '<Up>',
-	      \ '<denite:move_to_previous_line>',
-	      \ 'noremap'
-	      \)
-
 " Php namespace autoimport
 " inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
 " noremap <Leader>u :call PhpInsertUse()<CR>
@@ -117,8 +90,6 @@ nmap <Leader>tt :call phpactor#Transform()<CR>
 
 " Generate a new class (replacing the current file)
 nmap <Leader>cc :call phpactor#ClassNew()<CR>
-
-autocmd FileType php setlocal omnifunc=phpactor#Complete
 
 
 " Syntastic
@@ -154,10 +125,11 @@ set wildchar=<Tab> wildmenu wildmode=full
 set t_Co=256
 
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php setlocal omnifunc=phpactor#Complete
 
 " Visual options
 try
-    colorscheme 256_noir
+    colorscheme apprentice 
 catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
