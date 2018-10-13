@@ -38,7 +38,7 @@ if has('nvim')
     autocmd BufEnter * call ncm2#enable_for_buffer()
     set completeopt=noinsert,menuone,noselect
     Plug 'phpactor/ncm2-phpactor'
-    Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+    Plug 'phpactor/phpactor', {'do': 'composer install'}
 endif
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'adoy/vim-php-refactoring-toolbox'
@@ -47,6 +47,7 @@ Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'junegunn/fzf.vim'
+Plug 'eugen0329/vim-esearch'
 
 call plug#end()
 
