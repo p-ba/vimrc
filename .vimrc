@@ -177,7 +177,7 @@ if has("virtualedit")
   let paste#paste_cmd['v'] = '"-c<Esc>' . paste#paste_cmd['n']
   let paste#paste_cmd['i'] = 'x<BS><Esc>' . paste#paste_cmd['n'] . 'gi'
 
-  func! paste#Paste()
+  func! Paste()
     let ove = &ve
     set ve=all
     normal! `^
