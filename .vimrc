@@ -46,6 +46,7 @@ Plug 'osyo-manga/vim-over'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'eugen0329/vim-esearch'
 
