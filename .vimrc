@@ -124,19 +124,20 @@ autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
 set wildchar=<Tab> wildmenu wildmode=full
 
-set t_Co=256
 
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpactor#Complete
 
 " Visual options
 try
-    colorscheme apprentice 
+    colorscheme solarized8_low
 catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
+set background=light
+set termguicolors
+set t_Co=256
 
-set background=dark
 set number
 set guioptions=egmt "remove toolbar, scrollbars
 " Ignore following files when completing file/directory names
@@ -174,7 +175,7 @@ let g:auto_save_in_insert_mode = 0
 
 " Copy/paste options
 if has("virtualedit")
-  let paste#paste_cmd = {'n': ":call paste#Paste()<CR>"}
+  let paste#paste_cmd = {'n': ":call Paste()<CR>"}
   let paste#paste_cmd['v'] = '"-c<Esc>' . paste#paste_cmd['n']
   let paste#paste_cmd['i'] = 'x<BS><Esc>' . paste#paste_cmd['n'] . 'gi'
 
