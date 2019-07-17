@@ -1,4 +1,5 @@
 let mapleader="," "Changes Leader key into a comma instead of a backslash
+
 set nocompatible "be iMproved
 set laststatus=2
 set encoding=utf-8
@@ -48,7 +49,12 @@ Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'eugen0329/vim-esearch'
+Plug 'wincent/ferret'
+Plug 'mbbill/undotree'
+if has("persistent_undo")
+    set undodir=$HOME"/.vim/.undodir"
+    set undofile
+endif
 
 call plug#end()
 
