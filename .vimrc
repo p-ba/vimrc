@@ -25,7 +25,6 @@ Plug 'sumpygump/php-documentor-vim'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rking/ag.vim'
 Plug 'joonty/vdebug'
@@ -52,9 +51,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'wincent/ferret'
 Plug 'mbbill/undotree'
 if has("persistent_undo")
-    set undodir=$HOME"/.vim/.undodir"
+    set undodir=~/.vim/.undodir
     set undofile
 endif
+
 
 call plug#end()
 
