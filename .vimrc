@@ -37,6 +37,7 @@ if has('nvim')
     Plug 'roxma/nvim-yarp'
     autocmd BufEnter * call ncm2#enable_for_buffer()
     set completeopt=noinsert,menuone,noselect
+    Plug 'ncm2/ncm2-jedi'
     Plug 'phpactor/ncm2-phpactor'
     Plug 'phpactor/phpactor', {'do': 'composer install'}
 endif
