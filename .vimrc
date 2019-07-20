@@ -18,10 +18,10 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'arnaud-lb/vim-php-namespace'
 Plug 'w0rp/ale'
-Plug 'kien/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
+" Plug 'kien/ctrlp.vim'
+" Plug 'tacahiroy/ctrlp-funky'
 Plug 'vim-airline/vim-airline'
-Plug 'sumpygump/php-documentor-vim'
+" Plug 'sumpygump/php-documentor-vim'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -44,7 +44,7 @@ endif
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'osyo-manga/vim-over'
-Plug 'fisadev/vim-ctrlp-cmdpalette'
+" Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -76,9 +76,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 " Php doc generator
-au BufRead,BufNewFile *.php inoremap <buffer> <C-P> :call PhpDoc()<CR>
-au BufRead,BufNewFile *.php nnoremap <buffer> <C-P> :call PhpDoc()<CR>
-au BufRead,BufNewFile *.php vnoremap <buffer> <C-P> :call PhpDocRange()<CR>
+" au BufRead,BufNewFile *.php inoremap <buffer> <C-P> :call PhpDoc()<CR>
+" au BufRead,BufNewFile *.php nnoremap <buffer> <C-P> :call PhpDoc()<CR>
+" au BufRead,BufNewFile *.php vnoremap <buffer> <C-P> :call PhpDocRange()<CR>
 
 " Php namespace autoimport
 " inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
@@ -111,7 +111,13 @@ let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
 
 
 let g:ale_linters = {
-\   'php': ['php', 'phpstan', 'phpcs']
+\   'php': ['php', 'phpstan', 'phpcs'],
+\   'python': ['flake8']
+\}
+
+let g:ale_fixers = {
+\   'php': ['php-cs-fixer'],
+\   'python': ['yapf']
 \}
 
 " Airline
@@ -119,6 +125,9 @@ let g:airline#extensions#tabline#enabled = 1
 
 " CtrlP
 nnoremap <C-R> :CtrlPBufTag<Cr>
+nnoremap <C-P> :FZF<CR>
+nnoremap <C-F> :Rg<CR>
+nnoremap <C-E> :Command<CR>
 
 " Indentaion
 set tabstop=4
