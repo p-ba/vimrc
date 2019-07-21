@@ -18,8 +18,6 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'arnaud-lb/vim-php-namespace'
 Plug 'w0rp/ale'
-" Plug 'kien/ctrlp.vim'
-" Plug 'tacahiroy/ctrlp-funky'
 Plug 'vim-airline/vim-airline'
 " Plug 'sumpygump/php-documentor-vim'
 " Snippets
@@ -51,6 +49,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'wincent/ferret'
 Plug 'mbbill/undotree'
+Plug 'vim-scripts/php-annotations-syntax'
 if has("persistent_undo")
     set undodir=~/.vim/.undodir
     set undofile
@@ -123,8 +122,7 @@ let g:ale_fixers = {
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 
-" CtrlP
-nnoremap <C-R> :CtrlPBufTag<Cr>
+" FZF
 nnoremap <C-P> :FZF<CR>
 nnoremap <C-F> :Rg<CR>
 nnoremap <C-E> :Command<CR>
