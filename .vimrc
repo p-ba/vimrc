@@ -36,6 +36,7 @@ if has('nvim')
     autocmd BufEnter * call ncm2#enable_for_buffer()
     set completeopt=noinsert,menuone,noselect
     Plug 'ncm2/ncm2-jedi'
+    Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
     Plug 'phpactor/ncm2-phpactor'
     Plug 'phpactor/phpactor', {'do': 'composer install'}
 endif
