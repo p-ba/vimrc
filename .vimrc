@@ -48,13 +48,14 @@ Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'wincent/ferret'
-Plug 'mbbill/undotree'
+"Plug 'wincent/ferret'
+"Plug 'mbbill/undotree'
 Plug 'vim-scripts/php-annotations-syntax'
-if has("persistent_undo")
-    set undodir=~/.vim/.undodir
-    set undofile
-endif
+Plug 'ludovicchabant/vim-gutentags'
+" if has('persistent_undo')
+"    set undodir=~/.vim/.undodir
+"    set undofile
+" endif
 
 
 call plug#end()
@@ -126,6 +127,7 @@ let g:airline#extensions#tabline#enabled = 1
 " FZF
 nnoremap <C-P> :FZF<CR>
 nnoremap <C-F> :Rg<CR>
+vnoremap <C-F> y:<C-r>"<C-b>Rg <C-e><CR>
 nnoremap <C-E> :Command<CR>
 
 " Indentaion
