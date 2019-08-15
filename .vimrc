@@ -51,6 +51,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'wincent/ferret'
 "Plug 'mbbill/undotree'
 Plug 'vim-scripts/php-annotations-syntax'
+Plug 'ludovicchabant/vim-gutentags'
 " if has('persistent_undo')
 "    set undodir=~/.vim/.undodir
 "    set undofile
@@ -59,7 +60,8 @@ Plug 'vim-scripts/php-annotations-syntax'
 
 call plug#end()
 
-:set tags=./tags;
+" Rely on gutentags instead
+":set tags=./tags;
 :set mouse=a
 
 set rtp+=~/.fzf
@@ -68,6 +70,12 @@ map <C-n> :NERDTreeToggle<CR>
 
 " .editorconfig Fugitive compability
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+let g:gutentags_cache_dir = '~/.vim/.gutentags'
+let g:gutentags_exclude = ['*.css', '*.html', '*.min.js', '*.json', '*.xml',
+                            \ '*.phar', '*.ini', '*.rst', '*.md',
+                            \ '*var/cache*', '*var/log*']
+
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
