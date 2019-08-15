@@ -48,10 +48,9 @@ Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"Plug 'wincent/ferret'
+Plug 'wincent/ferret'
 "Plug 'mbbill/undotree'
 Plug 'vim-scripts/php-annotations-syntax'
-Plug 'ludovicchabant/vim-gutentags'
 " if has('persistent_undo')
 "    set undodir=~/.vim/.undodir
 "    set undofile
