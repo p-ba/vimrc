@@ -52,6 +52,7 @@ Plug 'wincent/ferret'
 "Plug 'mbbill/undotree'
 Plug 'vim-scripts/php-annotations-syntax'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'zackhsi/fzf-tags'
 " if has('persistent_undo')
 "    set undodir=~/.vim/.undodir
 "    set undofile
@@ -67,14 +68,15 @@ call plug#end()
 set rtp+=~/.fzf
 
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " .editorconfig Fugitive compability
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 let g:gutentags_cache_dir = '~/.vim/.gutentags'
-let g:gutentags_exclude = ['*.css', '*.html', '*.min.js', '*.json', '*.xml',
+let g:gutentags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
                             \ '*.phar', '*.ini', '*.rst', '*.md',
-                            \ '*var/cache*', '*var/log*']
+                            \ '*node_modules*', '*var/cache*', '*var/log*']
 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -119,7 +121,7 @@ let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
 
 
 let g:ale_linters = {
-\   'php': ['php', 'phpstan', 'phpcs'],
+\   'php': ['php', 'phpcs'],
 \   'python': ['flake8']
 \}
 
@@ -135,7 +137,7 @@ let g:airline#extensions#tabline#enabled = 1
 nnoremap <C-P> :FZF<CR>
 nnoremap <C-F> :Rg<CR>
 vnoremap <C-F> y:<C-r>"<C-b>Rg <C-e><CR>
-nnoremap <C-E> :Command<CR>
+nmap <C-]> <Plug>(fzf_tags)
 
 " Indentaion
 set tabstop=4
