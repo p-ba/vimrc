@@ -1,9 +1,8 @@
-let mapleader="," "Changes Leader key into a comma instead of a backslash
+let mapleader=","
 
-set nocompatible "be iMproved
+set nocompatible
 set laststatus=2
 set encoding=utf-8
-set spelllang=en_us
 " Rely on gutentags instead
 "set tags=./tags;
 set mouse=a
@@ -11,48 +10,47 @@ set clipboard=unnamedplus
 set rtp+=~/.fzf
 set background=light
 set termguicolors
-set t_Co=256
-set guifont=Source\ Code\ Pro\ Medium\ 12
+set t_co=256
+set guifont=source\ code\ pro\ medium\ 12
 set number
 set relativenumber
 set guioptions=egmt "remove toolbar, scrollbars
-" Ignore following files when completing file/directory names
-" Version control
+" ignore following files when completing file/directory names
+" version control
 set wildignore+=.hg,.git,.svn
-" Python byte code
+" python byte code
 set wildignore+=*.pyc
-" Binary images
+" binary images
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
-" Searching
-set incsearch "Search while typing
-set ignorecase "Case Insensitive Searching
-set smartcase "Lowercase = case insensitive, any uppercase = case sensitive
-set hlsearch "Highlight all search results
+" searching
+set incsearch "search while typing
+set ignorecase "case insensitive searching
+set smartcase "lowercase = case insensitive, any uppercase = case sensitive
+set hlsearch "highlight all search results
 " clear text hightlighted by seach
-nnoremap <leader>b :nohlsearch<CR>
+nnoremap <leader>b :nohlsearch<cr>
 
-" Backup и swp file
-" Don't create backups
+" don't create backups
 set nobackup
-" Don't create swap files
+" don't create swap files
 set noswapfile
 
-" Indentaion
+" indentaion
 set tabstop=4
 set shiftwidth=4
 set expandtab
 syntax on
 filetype plugin indent on
-set wildchar=<Tab> wildmenu wildmode=full
-autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php setlocal omnifunc=phpactor#Complete
+set wildchar=<tab> wildmenu wildmode=full
+autocmd filetype ruby setlocal ts=2 sw=2 expandtab
+autocmd filetype javascript set omnifunc=javascriptcomplete#completejs
+autocmd filetype php setlocal omnifunc=phpactor#complete
 
 " vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+  silent !curl -flo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd vimenter * pluginstall --sync | source $myvimrc
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -63,27 +61,36 @@ Plug 'tpope/vim-fugitive'
 Plug 'arnaud-lb/vim-php-namespace'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
-Plug 'SirVer/ultisnips'
+Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'rking/ag.vim'
+" .editorconfig Fugitive compability
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 Plug 'joonty/vdebug'
 Plug 'mhinz/vim-startify'
-Plug 'terryma/vim-expand-region'
 Plug 'sheerun/vim-polyglot'
 Plug 'majutsushi/tagbar'
 if has('nvim')
     Plug 'ncm2/ncm2'
     Plug 'roxma/nvim-yarp'
-    autocmd BufEnter * call ncm2#enable_for_buffer()
+    autocmd bufenter * call ncm2#enable_for_buffer()
     set completeopt=noinsert,menuone,noselect
     Plug 'ncm2/ncm2-jedi'
     Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
     Plug 'phpactor/ncm2-phpactor'
     Plug 'phpactor/phpactor', {'do': 'composer install'}
+    " Include use statement
+    nmap <Leader>u :call phpactor#UseAdd()<CR>
+    " Invoke the context menu
+    nmap <Leader>mm :call phpactor#ContextMenu()<CR>
+    " Goto definition of class or class member under the cursor
+    nmap <Leader>o :call phpactor#GotoDefinition()<CR>
+    " Transform the classes in the current file
+    nmap <Leader>tt :call phpactor#Transform()<CR>
+    " Generate a new class (replacing the current file)
+    nmap <Leader>cc :call phpactor#ClassNew()<CR>
 endif
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'adoy/vim-php-refactoring-toolbox'
 Plug 'osyo-manga/vim-over'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
@@ -100,25 +107,21 @@ nmap <Leader>/ <Plug>AgRawWordUnderCursor
 vmap <Leader>/ <Plug>AgRawVisualSelection
 Plug 'zackhsi/fzf-tags'
 nmap <C-]> <Plug>(fzf_tags)
-" Endof Project-wide search
 
 " History of edits
-" Plug 'mbbill/undotree'
-" if has('persistent_undo')
-"    set undodir=~/.vim/.undodir
-"    set undofile
-" endif
+if has('persistent_undo')
+    Plug 'mbbill/undotree'
+    set undodir=~/.vim/.undodir
+    set undofile
+endif
 
 call plug#end()
 
-" .editorconfig Fugitive compability
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 let g:gutentags_cache_dir = '~/.vim/.gutentags'
 let g:gutentags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
                             \ '*.phar', '*.ini', '*.rst', '*.md',
                             \ '*node_modules*', '*var/cache*', '*var/log*']
-
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -131,20 +134,6 @@ let g:UltiSnipsEditSplit="vertical"
 " noremap <Leader>u :call PhpInsertUse()<CR>
 " inoremap <Leader>e <C-O>:call PhpExpandClass()<CR>
 " noremap <Leader>e :call PhpExpandClass()<CR>
-" Include use statement
-nmap <Leader>u :call phpactor#UseAdd()<CR>
-
-" Invoke the context menu
-nmap <Leader>mm :call phpactor#ContextMenu()<CR>
-
-" Goto definition of class or class member under the cursor
-nmap <Leader>o :call phpactor#GotoDefinition()<CR>
-
-" Transform the classes in the current file
-nmap <Leader>tt :call phpactor#Transform()<CR>
-
-" Generate a new class (replacing the current file)
-nmap <Leader>cc :call phpactor#ClassNew()<CR>
 
 " Syntastic
 let g:syntastic_js_checkers = ['jshint', 'eslint']
