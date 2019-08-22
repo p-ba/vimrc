@@ -10,8 +10,7 @@ set clipboard=unnamedplus
 set rtp+=~/.fzf
 set background=light
 set termguicolors
-set t_co=256
-set guifont=source\ code\ pro\ medium\ 12
+set t_Co=256
 set number
 set relativenumber
 set guioptions=egmt "remove toolbar, scrollbars
@@ -44,7 +43,6 @@ filetype plugin indent on
 set wildchar=<tab> wildmenu wildmode=full
 autocmd filetype ruby setlocal ts=2 sw=2 expandtab
 autocmd filetype javascript set omnifunc=javascriptcomplete#completejs
-autocmd filetype php setlocal omnifunc=phpactor#complete
 
 " vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -79,6 +77,7 @@ if has('nvim')
     Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
     Plug 'phpactor/ncm2-phpactor'
     Plug 'phpactor/phpactor', {'do': 'composer install'}
+    autocmd filetype php setlocal omnifunc=phpactor#Complete
     " Include use statement
     nmap <Leader>u :call phpactor#UseAdd()<CR>
     " Invoke the context menu
@@ -94,6 +93,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'osyo-manga/vim-over'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'jeffkreeftmeijer/vim-dim'
 Plug 'ludovicchabant/vim-gutentags'
 
 " Project-wide search
@@ -153,15 +153,12 @@ let g:ale_fixers = {
 \   'python': ['yapf']
 \}
 
+colorscheme lucius
+
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 
 " Visual options
-try
-    colorscheme solarized8_low
-catch /^Vim\%((\a\+)\)\=:E185/
-    " deal with it
-endtry
 
 " PhpDocumentator
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
