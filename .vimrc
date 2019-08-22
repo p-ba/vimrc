@@ -93,7 +93,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'osyo-manga/vim-over'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'jeffkreeftmeijer/vim-dim'
 Plug 'ludovicchabant/vim-gutentags'
 
 " Project-wide search
@@ -153,12 +152,11 @@ let g:ale_fixers = {
 \   'python': ['yapf']
 \}
 
-colorscheme lucius
+colorscheme gruvbox
+hi! Normal ctermbg=NONE guibg=NONE
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
-
-" Visual options
 
 " PhpDocumentator
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
