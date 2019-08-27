@@ -54,6 +54,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
+let NERDTreeIgnore = ['\.git$', '\.idea$']
+let NERDTreeShowHidden = 1
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'arnaud-lb/vim-php-namespace'
