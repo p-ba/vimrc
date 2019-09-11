@@ -95,7 +95,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'osyo-manga/vim-over'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'ludovicchabant/vim-gutentags'
 
 " Project-wide search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
