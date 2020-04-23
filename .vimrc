@@ -1,49 +1,3 @@
-let mapleader=","
-
-set nocompatible
-set laststatus=2
-set encoding=utf-8
-" Rely on gutentags instead
-"set tags=./tags;
-set mouse=a
-set clipboard=unnamedplus
-set rtp+=~/.fzf
-set background=light
-set termguicolors
-set t_Co=256
-set number
-set relativenumber
-set guioptions=egmt "remove toolbar, scrollbars
-" ignore following files when completing file/directory names
-" version control
-set wildignore+=.hg,.git,.svn
-" python byte code
-set wildignore+=*.pyc
-" binary images
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
-" searching
-set incsearch "search while typing
-set ignorecase "case insensitive searching
-set smartcase "lowercase = case insensitive, any uppercase = case sensitive
-set hlsearch "highlight all search results
-" clear text hightlighted by seach
-nnoremap <leader>b :nohlsearch<cr>
-
-" don't create backups
-set nobackup
-" don't create swap files
-set noswapfile
-
-" indentaion
-set tabstop=4
-set shiftwidth=4
-set expandtab
-syntax on
-filetype plugin indent on
-set wildchar=<tab> wildmenu wildmode=full
-autocmd filetype ruby setlocal ts=2 sw=2 expandtab
-autocmd filetype javascript set omnifunc=javascriptcomplete#completejs
-
 " vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -flo ~/.vim/autoload/plug.vim --create-dirs
@@ -52,132 +6,63 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-
-Plug 'scrooloose/nerdtree'
-let NERDTreeIgnore = ['\.git$', '\.idea$']
-let NERDTreeShowHidden = 1
-Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'arnaud-lb/vim-php-namespace'
-Plug 'w0rp/ale'
-Plug 'vim-airline/vim-airline'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'editorconfig/editorconfig-vim'
-" .editorconfig Fugitive compability
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-Plug 'joonty/vdebug'
-Plug 'mhinz/vim-startify'
-Plug 'sheerun/vim-polyglot'
-Plug 'majutsushi/tagbar'
-if has('nvim')
-    Plug 'ncm2/ncm2'
-    Plug 'roxma/nvim-yarp'
-    autocmd bufenter * call ncm2#enable_for_buffer()
-    set completeopt=noinsert,menuone,noselect
-    Plug 'ncm2/ncm2-jedi'
-    Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-    Plug 'phpactor/ncm2-phpactor'
-    Plug 'phpactor/phpactor', {'do': 'composer install'}
-    autocmd filetype php setlocal omnifunc=phpactor#Complete
-    " Include use statement
-    nmap <Leader>u :call phpactor#UseAdd()<CR>
-    " Invoke the context menu
-    nmap <Leader>mm :call phpactor#ContextMenu()<CR>
-    " Goto definition of class or class member under the cursor
-    nmap <Leader>o :call phpactor#GotoDefinition()<CR>
-    " Transform the classes in the current file
-    nmap <Leader>tt :call phpactor#Transform()<CR>
-    " Generate a new class (replacing the current file)
-    nmap <Leader>cc :call phpactor#ClassNew()<CR>
-endif
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'osyo-manga/vim-over'
-Plug 'vim-scripts/vim-auto-save'
-Plug 'rafi/awesome-vim-colorschemes'
-
-" Project-wide search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-nnoremap <C-P> :FZF<CR>
-nnoremap <C-F> :Rg<CR>
-vnoremap <C-F> y:<C-r>"<C-b>Rg <C-e><CR>
-Plug 'jesseleite/vim-agriculture'
-nmap <Leader>/ <Plug>AgRawWordUnderCursor
-vmap <Leader>/ <Plug>AgRawVisualSelection
-Plug 'zackhsi/fzf-tags'
-nmap <C-]> <Plug>(fzf_tags)
-
-" History of edits
-if has('persistent_undo')
-    Plug 'mbbill/undotree'
-    set undodir=~/.vim/.undodir
-    set undofile
-endif
-
+Plug 'tpope/vim-fugitive'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
+syntax enable
+filetype plugin on
+set clipboard+=unnamed
+set path+=**
+set wildmenu
+set relativenumber
+set mouse=a
+set autoread
+set showcmd
 
-let g:gutentags_cache_dir = '~/.vim/.gutentags'
-let g:gutentags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
-                            \ '*.phar', '*.ini', '*.rst', '*.md',
-                            \ '*node_modules*', '*var/cache*', '*var/log*']
+set backupdir=~/.vim/.tmp/backup//
+set directory=~/.vim/.tmp/swap//
+set undodir=~/.vim/.tmp/undo//
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
+" bell
+set noerrorbells
+set visualbell
+set t_vb=
 
-" Php namespace autoimport
-" inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
-" noremap <Leader>u :call PhpInsertUse()<CR>
-" inoremap <Leader>e <C-O>:call PhpExpandClass()<CR>
-" noremap <Leader>e :call PhpExpandClass()<CR>
+" search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
 
-" Syntastic
-let g:syntastic_js_checkers = ['jshint', 'eslint']
-let g:syntastic_jsx_checkers = ['jshint', 'eslint']
-let g:syntastic_es6_checkers = ['jshint', 'eslint']
-let g:syntastic_php_checkers = ['php']
-let g:syntastic_php_phpmd_args='codesize, controversial, design, naming, unusedcode'
-let g:syntastic_php_phpcs_args='--extensions=php --standard=PSR2'
+" Show matching bracets
+set showmatch
 
-let g:ale_linters = {
-\   'php': ['php', 'phpcs'],
-\   'python': ['flake8']
-\}
+" Change Netrw tree mode
+let g:netrw_liststyle=3
+let g:netrw_banner=0
 
-let g:ale_fixers = {
-\   'php': ['php-cs-fixer'],
-\   'python': ['yapf']
-\}
+" Indent
+set tabstop=4
+set shiftwidth=4
+set ai
+set si
 
-colorscheme gruvbox
-hi! Normal ctermbg=NONE guibg=NONE
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> <f2> <plug>(lsp-hover)
+endfunction
 
-" Airline
-let g:airline#extensions#tabline#enabled = 1
-
-" PhpDocumentator
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
-nnoremap <buffer> <C-d> :call pdv#DocumentWithSnip()<CR>
-
-" Buffers
-" Ctrl Left & Right move between buffers
-noremap <silent> <C-left> :bprev<CR>
-noremap <silent> <C-h> :bprev<CR>
-noremap <silent> <C-right> :bnext<CR>
-noremap <silent> <C-l> :bnext<CR>
-" Closes the current buffer
-nnoremap <silent> <Leader>q :bd<CR>
-
-" Autosave
-let g:auto_save = 1
-let g:auto_save_in_insert_mode = 0
-
-" {<CR>
-" auto complete {} indent and position the cursor in the middle line
-inoremap {<CR> {<CR>}<Esc>O
-inoremap (<CR> (<CR>)<Esc>O
-inoremap [<CR> [<CR>]<Esc>O
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
