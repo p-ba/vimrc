@@ -3,4 +3,6 @@ plugged/
 autoload/
 .undodir/
 .gutentags/
+pack/
 tags*
+.netrwhist
