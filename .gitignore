@@ -6,3 +6,4 @@ autoload/
 pack/
 tags*
 .netrwhist
+local.vim

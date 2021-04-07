@@ -12,10 +12,12 @@ Plug 'zackhsi/fzf-tags'
 Plug 'tpope/vim-fugitive'
 Plug 'sheerun/vim-polyglot'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-surround'
-Plug '907th/vim-auto-save'
+Plug 'tpope/vim-commentary'
+
+Plug 'preservim/nerdtree'
 
 "LSP
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -32,11 +34,10 @@ Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'vim-test/vim-test'
+Plug 'vim-vdebug/vdebug'
 call plug#end()
 
 let g:netrw_list_hide='.git,.DS_Store,.idea,.vscode'
-
-let g:auto_save = 1
 
 syntax enable
 set redrawtime=5000
@@ -91,13 +92,35 @@ set shiftwidth=4
 set ai
 set si
 
+nnoremap <C-n> :NERDTreeToggle<CR>
+
 " LSP
 set completeopt=menuone,noinsert,noselect
 autocmd FileType php set iskeyword+=$
 
-nmap <silent> gd <Plug>(coc-definition)
+" Add tag stack support
+function! s:goto_tag(tagkind) abort
+  let tagname = expand('<cWORD>')
+  let winnr = winnr()
+  let pos = getcurpos()
+  let pos[0] = bufnr()
+
+  if CocAction('jump' . a:tagkind)
+    call settagstack(winnr, { 
+      \ 'curidx': gettagstack()['curidx'], 
+      \ 'items': [{'tagname': tagname, 'from': pos}] 
+      \ }, 't')
+  endif
+endfunction
+
+nmap gd :call <SID>goto_tag("Definition")<CR>
+nmap gi :call <SID>goto_tag("Implementation")<CR>
+nmap gr :call <SID>goto_tag("References")<CR>
 nmap <f2> <Plug>(coc-rename)
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <c-f> coc#refresh()
 
 nnoremap <SPACE> <Nop>
@@ -125,4 +148,9 @@ let test#php#phpunit#executable = '/usr/local/bin/docker-compose run tests ./ven
 let g:ale_fixers = {'javascript': ['eslint'], 'php': ['php_cs_fixer']}
 let g:ale_linters = {'javascript': ['eslint'], 'php': ['phpstan']}
 let g:ale_fix_on_save = 1
+
+
+if !empty(glob('local.vim'))
+   source 'local.vim'
+endif
 
