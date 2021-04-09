@@ -40,7 +40,7 @@ call plug#end()
 let g:netrw_list_hide='.git,.DS_Store,.idea,.vscode'
 
 syntax enable
-set redrawtime=5000
+set lazyredraw
 set updatetime=300
 filetype plugin on
 set clipboard+=unnamed
@@ -138,11 +138,10 @@ nnoremap <Leader>t :Tags<CR>
 nmap <C-]> <Plug>(fzf_tags)
 noreabbrev <expr> ts getcmdtype() == ":" && getcmdline() == 'ts' ? 'FZFTselect' : 'ts'
 
+:nmap <Leader>c :let @+ = expand("%")<cr>
+
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" Testing
-let test#php#phpunit#executable = '/usr/local/bin/docker-compose run tests ./vendor/bin/phpunit'
 
 " Fixing
 let g:ale_fixers = {'javascript': ['eslint'], 'php': ['php_cs_fixer']}
@@ -150,7 +149,7 @@ let g:ale_linters = {'javascript': ['eslint'], 'php': ['phpstan']}
 let g:ale_fix_on_save = 1
 
 
-if !empty(glob('local.vim'))
-   source 'local.vim'
+if !empty(glob('~/.vim/local.vim'))
+   source ~/.vim/local.vim
 endif
 
