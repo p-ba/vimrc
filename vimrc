@@ -16,25 +16,28 @@ Plug 'itchyny/lightline.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-
+Plug 'easymotion/vim-easymotion'
+Plug 'arnaud-lb/vim-php-namespace'
 Plug 'preservim/nerdtree'
 
-"LSP
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"LSP-neovim
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'nvim-lua/completion-nvim'
-"Plug 'steelsojka/completion-buffers'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 "Linting
 Plug 'dense-analysis/ale'
 
+"Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'vim-test/vim-test'
-Plug 'vim-vdebug/vdebug'
 call plug#end()
 
 let g:netrw_list_hide='.git,.DS_Store,.idea,.vscode'
@@ -62,8 +65,8 @@ if (has("termguicolors"))
 endif
 
 let base16colorspace=256  "Access colors present in 256 colorspace
-set background=light
-colorscheme solarized8_low
+" set background=light
+colorscheme PaperColor
 
 " OS X backspace
 set backspace=indent,eol,start
@@ -92,50 +95,28 @@ set shiftwidth=4
 set ai
 set si
 
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeFind<CR>
+nmap <ESC> :noh<CR>
 
-" LSP
-set completeopt=menuone,noinsert,noselect
-autocmd FileType php set iskeyword+=$
-
-" Add tag stack support
-function! s:goto_tag(tagkind) abort
-  let tagname = expand('<cWORD>')
-  let winnr = winnr()
-  let pos = getcurpos()
-  let pos[0] = bufnr()
-
-  if CocAction('jump' . a:tagkind)
-    call settagstack(winnr, { 
-      \ 'curidx': gettagstack()['curidx'], 
-      \ 'items': [{'tagname': tagname, 'from': pos}] 
-      \ }, 't')
-  endif
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
 endfunction
-
-nmap gd :call <SID>goto_tag("Definition")<CR>
-nmap gi :call <SID>goto_tag("Implementation")<CR>
-nmap gr :call <SID>goto_tag("References")<CR>
-nmap <f2> <Plug>(coc-rename)
-
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <c-f> coc#refresh()
+autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
 
 nnoremap <SPACE> <Nop>
 let mapleader=" "
-
-nmap <Leader>s :w<CR>
-nmap <Leader>q :q!<CR>
 
 nnoremap <Leader>p :Files<CR>
 nnoremap <Leader>f :Rg<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>r :BTags<CR>
 nnoremap <Leader>t :Tags<CR>
+nnoremap <Leader>w :TestNearest<CR>
+nnoremap <Leader>d :TestLast<CR>
 
-nmap <C-]> <Plug>(fzf_tags)
+
 noreabbrev <expr> ts getcmdtype() == ":" && getcmdline() == 'ts' ? 'FZFTselect' : 'ts'
 
 :nmap <Leader>c :let @+ = expand("%")<cr>
