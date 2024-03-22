@@ -1,9 +1,1 @@
-bundle/
-plugged/
-autoload/
-.undodir/
-.gutentags/
-pack/
-tags*
-.netrwhist
-local.vim
+/undodir/
