@@ -2,6 +2,7 @@ return {
     "folke/tokyonight.nvim",
     dependencies = {
         --"andreypopp/vim-colors-plain",
+        "catppuccin/nvim",
     },
     priority = 1000,
     lazy = false,
@@ -12,6 +13,7 @@ return {
         else
             vim.opt.termguicolors = true
             vim.cmd([[colorscheme tokyonight]])
+            --vim.cmd([[colorscheme catppuccin-frappe]])
             vim.cmd[[hi Normal ctermbg=NONE guibg=NONE]]
         end
     end,

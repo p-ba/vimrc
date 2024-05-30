@@ -5,13 +5,13 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<Leader>s", ":wa<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>co", ":copen<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>cq", ":cclose<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-k>", ":cnext<CR>", { silent = true })
-vim.keymap.set("n", "<C-j>", ":cprev<CR>", { silent = true })
+vim.keymap.set("n", "<C-j>", ":cnext<CR>", { silent = true })
+vim.keymap.set("n", "<C-k>", ":cprev<CR>", { silent = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(ev)
-        vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist)
+        vim.keymap.set('n', '<Leader>q', vim.diagnostic.setqflist)
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
         local opts = { buffer = ev.buf }
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
         vim.keymap.set({ 'n', 'v' }, '<Leader>ca', vim.lsp.buf.code_action, opts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-        vim.keymap.set('n', '<F1>', function()
+        vim.keymap.set('n', '<Leader>l', function()
             vim.lsp.buf.format { async = true }
         end, opts)
     end,
