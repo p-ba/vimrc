@@ -7,29 +7,21 @@ vim.keymap.set("n", "<Leader>co", ":copen<CR>", { noremap = true, silent = true 
 vim.keymap.set("n", "<Leader>cq", ":cclose<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", ":cnext<CR>", { silent = true })
 vim.keymap.set("n", "<C-k>", ":cprev<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>g", ":grep <cword><CR>:copen<CR>", { silent = true })
+vim.keymap.set('i', 'jj', '<Esc>', { noremap = true })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    callback = function(ev)
-        vim.keymap.set('n', '<Leader>q', vim.diagnostic.setqflist)
-        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-        local opts = { buffer = ev.buf }
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
-        vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-        vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-        vim.keymap.set('n', '<Leader>wl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, opts)
-        vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, opts)
-        vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
-        vim.keymap.set({ 'n', 'v' }, '<Leader>ca', vim.lsp.buf.code_action, opts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-        vim.keymap.set('n', '<Leader>l', function()
-            vim.lsp.buf.format { async = true }
-        end, opts)
-    end,
-})
+local function copy_path_to_clipboard()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    vim.notify('Copied "' .. path .. '" to the clipboard!')
+end
+vim.keymap.set("n", "<Leader>c", copy_path_to_clipboard, { noremap = true, silent = true })
+
+local find_definition_regex = string.gsub(string.gsub([[
+(^[ \t]*(function|def|class|interface|public|private|protected)(\s\w*)*\s<cword>[\s\n{(])
+|
+(^[ \t]*(\w*)\s<cword>[ :=]*(function[ ]*)?\()
+]], "\n", ""), "|", "\\|")
+local cmd = string.format(":grep '%s'<CR>:copen<CR>", find_definition_regex)
+
+vim.keymap.set("n", "<Leader>d", cmd, { silent = true })

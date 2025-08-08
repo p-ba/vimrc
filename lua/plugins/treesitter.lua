@@ -11,10 +11,9 @@ return {
         local treesitter = require("nvim-treesitter.configs")
         treesitter.setup {
             ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "php", "javascript", "typescript", "html", "css", "scss" },
-            auto_install = true,
+            auto_install = false,
             highlight = {
                 enable = true,
-                additional_vim_regex_highlighting = false,
             },
             indent = { enable = true },
             incremental_selection = {
