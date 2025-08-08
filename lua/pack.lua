@@ -27,25 +27,17 @@ else
 end
 
 vim.pack.add({"https://github.com/nvim-treesitter/nvim-treesitter"}) -- treesitter
-local treesitter_setup = function()
-    local treesitter = require("nvim-treesitter.configs")
-    treesitter.setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "javascript", "typescript", "html", "css", "scss" },
-        auto_install = true,
-        highlight = {
-            enable = true,
-        },
-        indent = { enable = true },
-        modules = {},
-        sync_install = false,
-        ignore_install = {},
-    })
-end
-vim.api.nvim_create_autocmd("BufReadPre", {
-    callback = treesitter_setup,
-})
-vim.api.nvim_create_autocmd("BufNewFile", {
-    callback  = treesitter_setup,
+local treesitter = require("nvim-treesitter.configs")
+treesitter.setup({
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "javascript", "typescript", "html", "css", "scss" },
+    auto_install = true,
+    highlight = {
+        enable = true,
+    },
+    indent = { enable = true },
+    modules = {},
+    sync_install = false,
+    ignore_install = {},
 })
 
 vim.pack.add({"https://github.com/neovim/nvim-lspconfig"})
@@ -142,7 +134,42 @@ end, { desc = "Search files" })
 vim.keymap.set({"n"}, "<leader>b", MiniPick.builtin.buffers, { desc = "Search buffers" })
 vim.keymap.set({"n"}, "<leader>e", MiniPick.builtin.resume, { desc = "Resume last search" })
 
+vim.pack.add({"https://github.com/L3MON4D3/LuaSnip"})
+local ls = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/LuaSnip/" })
+vim.keymap.set({"i"}, "<C-e>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i"}, "<C-n>", function()
+    if ls.jumpable(1) then
+        ls.jump(1)
+    end
+end, {silent = true})
+vim.keymap.set({"i"}, "<C-p>", function()
+    if ls.jumpable(-1) then
+        ls.jump(-1)
+    end
+end, {silent = true})
+
+vim.pack.add({"https://github.com/mbbill/undotree"})
+
 vim.pack.add({"https://github.com/tpope/vim-fugitive"})
+
+vim.g.user_emmet_leader_key = "<C-x>"
+vim.pack.add({"https://github.com/mattn/emmet-vim"})
+
+vim.pack.add({"https://github.com/supermaven-inc/supermaven-nvim"})
+require("supermaven-nvim").setup({
+    keymaps = {
+        accept_suggestion = "<Tab>",
+        clear_suggestion = "<C-]>",
+        accept_word = "<C-j>",
+    },
+    condition = function()
+        return vim.bo.filetype == "fugitive" or vim.bo.filetype == "git" or vim.bo.filetype == "diff"
+    end,
+})
+
+vim.pack.add({"https://github.com/numToStr/Comment.nvim"})
 
 vim.pack.add({"https://github.com/editorconfig/editorconfig-vim"})
 vim.g.EditorConfig_exclude_patterns = {"fugitive://.*", "scp://.*"}

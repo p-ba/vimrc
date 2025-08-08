@@ -17,13 +17,13 @@ vim.diagnostic.config({
 })
 
 vim.api.nvim_create_user_command(
-  'TrimWhitespace',
-  function(opts)
-	  vim.cmd(":%s/\\s\\+$//e")
-  end,
-  {
-    nargs = 0,
-}
+    'TrimWhitespace',
+    function(opts)
+        vim.cmd(":%s/\\s\\+$//e")
+    end,
+    {
+        nargs = 0,
+    }
 )
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
@@ -31,22 +31,26 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     command = "set filetype=css",
 })
 
-vim.opt.path = '**'
+vim.opt.path = "**"
 vim.opt.wildignore:append{
-    '**/node_modules/*',
-    '**/vendor/*',
-    '**/var/cache/*',
-    '**/venv/*',
-    '**/.venv/*',
-    '**/.git/*',
-    '**/*.min.js',
-    '**/*.min.css',
-    '**/*.jpg',
-    '**/*.jpeg',
-    '**/*.png',
-    '**/*.gif',
-    '**/*.zip',
-    '**/*.gz',
+    "**/node_modules/*",
+    "**/vendor/*",
+    "**/var/cache/*",
+    "**/venv/*",
+    "**/.venv/*",
+    "**/.git/*",
+    "**/*.min.js",
+    "**/*.min.css",
+    "**/*.css.min",
+    "**/*.js.min",
+    "**/*.css.map",
+    "**/*.js.map",
+    "**/*.jpg",
+    "**/*.jpeg",
+    "**/*.png",
+    "**/*.gif",
+    "**/*.zip",
+    "**/*.gz",
 }
 
 vim.opt.tabstop = 4
