@@ -16,12 +16,3 @@ local function copy_path_to_clipboard()
     vim.notify('Copied "' .. path .. '" to the clipboard!')
 end
 vim.keymap.set("n", "<Leader>c", copy_path_to_clipboard, { noremap = true, silent = true })
-
-local find_definition_regex = string.gsub(string.gsub([[
-(^[ \t]*(function|def|class|interface|public|private|protected)(\s\w*)*\s<cword>[\s\n{(])
-|
-(^[ \t]*(\w*)\s<cword>[ :=]*(function[ ]*)?\()
-]], "\n", ""), "|", "\\|")
-local cmd = string.format(":grep '%s'<CR>:copen<CR>", find_definition_regex)
-
-vim.keymap.set("n", "<Leader>d", cmd, { silent = true })

@@ -11,20 +11,16 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 40
 vim.opt.grepprg = "rg --vimgrep -U"
 vim.opt.guicursor = "n-v-c-i:block"
+vim.opt.winborder = "rounded"
+vim.g.editorconfig = true
 
 vim.diagnostic.config({
     virtual_text = true
 })
 
-vim.api.nvim_create_user_command(
-    'TrimWhitespace',
-    function(opts)
-        vim.cmd(":%s/\\s\\+$//e")
-    end,
-    {
-        nargs = 0,
-    }
-)
+vim.api.nvim_create_user_command('TrimWhitespace', function()
+    vim.cmd(":%s/\\s\\+$//e")
+end, {nargs = 0})
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     pattern = {"*.scss"},

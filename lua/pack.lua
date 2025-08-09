@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             return
         end
         for _, lsp in ipairs(format_on_save) do
-            if lsp == client.name then
+            if lsp == client.name and client:supports_method("textDocument/formatting") then
                 vim.api.nvim_create_autocmd("BufWritePre", {
                     group = vim.api.nvim_create_augroup("user.lsp", { clear=false }),
                     buffer = args.buf,
@@ -105,6 +105,7 @@ vim.lsp.enable("eslint")
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("gopls")
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("bashls")
 
 vim.lsp.config("lua_ls", {
     settings = {
@@ -137,8 +138,8 @@ vim.keymap.set({"n"}, "<leader>e", MiniPick.builtin.resume, { desc = "Resume las
 vim.pack.add({"https://github.com/L3MON4D3/LuaSnip"})
 local ls = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/LuaSnip/" })
-vim.keymap.set({"i"}, "<C-e>", function() ls.expand() end, {silent = true})
+require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/LuaSnip/" })
+vim.keymap.set({"i"}, "<C-e>", ls.expand, {silent = true})
 vim.keymap.set({"i"}, "<C-n>", function()
     if ls.jumpable(1) then
         ls.jump(1)
@@ -151,6 +152,9 @@ vim.keymap.set({"i"}, "<C-p>", function()
 end, {silent = true})
 
 vim.pack.add({"https://github.com/mbbill/undotree"})
+vim.keymap.set({"n"}, "<leader>u", function()
+    vim.cmd("UndotreeToggle")
+end, {silent = true, noremap = true})
 
 vim.pack.add({"https://github.com/tpope/vim-fugitive"})
 
@@ -170,8 +174,5 @@ require("supermaven-nvim").setup({
 })
 
 vim.pack.add({"https://github.com/numToStr/Comment.nvim"})
-
-vim.pack.add({"https://github.com/editorconfig/editorconfig-vim"})
-vim.g.EditorConfig_exclude_patterns = {"fugitive://.*", "scp://.*"}
 
 vim.pack.add({"https://github.com/tpope/vim-vinegar"})
