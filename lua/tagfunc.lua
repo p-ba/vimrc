@@ -10,6 +10,7 @@ local function ripgrep_search(pattern, options)
         "rg",
         "--vimgrep",
         "--color=never",
+        "--no-messages",
         "-U",
         string.format("'%s'", pattern),
         file_pattern,
@@ -63,7 +64,7 @@ local regex_override = {
     cs = "(public|private|protected|abstract|class|enum)(\\s\\w*)?(\\s[\\w<>]*)?\\s<cword>[\\n\\s{:]"
 }
 
-function dumbjump_tagfunc(tag_name, flags, ...)
+function dumbjump_tagfunc(tag_name, flags)
     -- `tag_name`: The tag to search for.
     -- `flags`: Tag search flags (e.g., 'w' for wrap search).
     -- `...`: Additional arguments (e.g., context).
@@ -86,7 +87,7 @@ function dumbjump_tagfunc(tag_name, flags, ...)
 
     local search_results = ripgrep_search(regex, {
         file_pattern = file_pattern,
-        extra_args = {"--ignore-case"}
+        extra_args = { "--ignore-case" }
     })
 
     if search_results then
@@ -94,9 +95,11 @@ function dumbjump_tagfunc(tag_name, flags, ...)
         for _, result in ipairs(search_results) do
             num_results = num_results + 1
             table.insert(results, {
-                name = result.text,
+                name = tag_name,
+                text = result.text,
                 filename = result.filename,
                 cmd = ":" .. result.lnum,
+                lnum = result.lnum,
                 kind = "f",
                 user_data = result.text,
             })
@@ -122,6 +125,9 @@ vim.o.tagfunc = "v:lua.dumbjump_tagfunc"
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if not client then
+            return
+        end
         if client:supports_method('textDocument/definition') then
             vim.o.tagfunc = "v:lua.vim.lsp.tagfunc"
         end
@@ -129,8 +135,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.api.nvim_create_autocmd('LspDetach', {
-    callback = function(ev)
+    callback = function()
         vim.o.tagfunc = "v:lua.dumbjump_tagfunc"
     end,
 })
-
