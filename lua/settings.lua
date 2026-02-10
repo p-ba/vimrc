@@ -17,25 +17,27 @@ vim.g.editorconfig = true
 vim.diagnostic.config({
     virtual_text = true
 })
-require('vim._extui').enable({})
+require('vim._core.ui2').enable({})
 
 vim.api.nvim_create_user_command('TrimWhitespace', function()
+    local save_cursor = vim.fn.getpos(".")
     vim.cmd(":%s/\\s\\+$//e")
-end, { nargs = 0 })
+    vim.fn.setpos(".", save_cursor)
+end, { nargs = 0, desc = "Remove trailing whitespace" })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     pattern = { "*.scss" },
     command = "set filetype=css",
 })
 
-vim.opt.path = "**"
+vim.opt.path:append("**")
 vim.opt.wildignore:append {
-    "**/node_modules/*",
-    "**/vendor/*",
-    "**/var/cache/*",
-    "**/venv/*",
-    "**/.venv/*",
-    "**/.git/*",
+    "node_modules/**",
+    "vendor/**",
+    "var/cache/**",
+    "venv/**",
+    ".venv/**",
+    ".git/**",
     "**/*.min.js",
     "**/*.min.css",
     "**/*.css.min",
@@ -57,7 +59,7 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.expandtab = true
 vim.opt.backspace = 'indent,eol,start'
-vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
+vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
 vim.opt.shortmess:append "c"
 
 vim.opt.wrap = false
@@ -76,10 +78,21 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv('HOME') .. '/.config/nvim/undodir'
 vim.opt.undofile = true
 
-vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = ""
+
+-- Better split behavior
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+-- Better search experience
+vim.opt.showmatch = true
+vim.opt.matchtime = 1
+
+-- Better file handling
+vim.opt.autoread = true
+vim.opt.autowrite = false

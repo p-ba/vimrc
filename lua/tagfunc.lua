@@ -5,6 +5,12 @@ local function ripgrep_search(pattern, options)
     local extra_args = options.extra_args or {}
     local cwd = options.cwd or vim.fn.getcwd()
 
+    -- Check if ripgrep is available
+    if vim.fn.executable("rg") == 0 then
+        vim.notify("ripgrep (rg) is not installed or not in PATH", vim.log.levels.WARN)
+        return nil
+    end
+
     -- Construct the ripgrep command.
     local cmd = {
         "rg",
@@ -31,6 +37,10 @@ local function ripgrep_search(pattern, options)
 
     local output = handle:read("*a")
     handle:close()
+    
+    if not output or output == "" then
+        return {}
+    end
 
     -- Parse the output.
     local results = {}
@@ -68,6 +78,10 @@ function dumbjump_tagfunc(tag_name, flags)
     -- `tag_name`: The tag to search for.
     -- `flags`: Tag search flags (e.g., 'w' for wrap search).
     -- `...`: Additional arguments (e.g., context).
+    if not tag_name or tag_name == "" then
+        return {}
+    end
+    
     if string.find(flags, "r") or string.find(flags, "i") then
         return nil
     end
@@ -75,7 +89,7 @@ function dumbjump_tagfunc(tag_name, flags)
 
     local ext = vim.fn.expand("%:e")
     local file_pattern = nil
-    if ext then
+    if ext and ext ~= "" then
         file_pattern = "*." .. ext
     end
 
@@ -83,14 +97,14 @@ function dumbjump_tagfunc(tag_name, flags)
     if ext and regex_override[ext] then
         regex = regex_override[ext]
     end
-    regex = string.gsub(regex, "<cword>", tag_name)
+    regex = string.gsub(regex, "<cword>", vim.fn.escape(tag_name, "[]().*+?^$"))
 
     local search_results = ripgrep_search(regex, {
         file_pattern = file_pattern,
         extra_args = { "--ignore-case" }
     })
 
-    if search_results then
+    if search_results and #search_results > 0 then
         local num_results = 0
         for _, result in ipairs(search_results) do
             num_results = num_results + 1

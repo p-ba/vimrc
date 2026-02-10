@@ -7,5 +7,5 @@ vim.keymap.set({ "n" }, "<leader><space>", function()
     })
 end, { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<leader>b", Snacks.picker.buffers, { silent = true, noremap = true })
+vim.keymap.set({ "n" }, "<leader>f", Snacks.picker.grep, { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<leader>e", Snacks.picker.recent, { silent = true, noremap = true })
-

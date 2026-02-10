@@ -76,15 +76,3 @@ vim.api.nvim_create_autocmd("LspDetach", {
         end
     end,
 })
-
-vim.pack.add({ "https://github.com/supermaven-inc/supermaven-nvim" })
-require("supermaven-nvim").setup({
-    keymaps = {
-        accept_suggestion = "<Tab>",
-        clear_suggestion = "<C-]>",
-        accept_word = "<C-j>",
-    },
-    condition = function()
-        return vim.bo.filetype == "fugitive" or vim.bo.filetype == "git" or vim.bo.filetype == "diff"
-    end,
-})

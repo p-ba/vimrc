@@ -1,7 +1,7 @@
 vim.pack.add({ "https://github.com/folke/tokyonight.nvim" }) -- colorscheme
 
 if os.getenv("TERM_PROGRAM") == "Apple_Terminal" then
-    vim.cmd([[colorscheme blue]])
+    vim.cmd([[colorscheme catppuccin]])
     vim.opt.termguicolors = false
 else
     local transparent = true
@@ -22,16 +22,23 @@ else
     vim.cmd([[colorscheme tokyonight]])
 end
 
-vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" }) -- treesitter
-local treesitter = require("nvim-treesitter.configs")
-treesitter.setup({
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "javascript", "typescript", "html", "css", "scss" },
-    auto_install = true,
-    highlight = {
-        enable = true,
-    },
-    indent = { enable = true },
-    modules = {},
-    sync_install = false,
-    ignore_install = {},
+vim.api.nvim_create_autocmd("VimEnter", {
+    once = true,
+    callback = function()
+        vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
+        local treesitter = require("nvim-treesitter.configs")
+        treesitter.setup({
+            ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "javascript", "typescript", "html", "css", "scss" },
+            auto_install = true,
+            highlight = {
+                enable = true,
+            },
+            indent = {
+                enable = true,
+            },
+            modules = {},
+            sync_install = false,
+            ignore_install = {},
+        })
+    end,
 })
